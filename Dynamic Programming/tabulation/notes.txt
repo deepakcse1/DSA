@@ -1,0 +1,33 @@
+How to build tabulation from memoization for 2D array
+--------------------------------------------------------
+1) Use base case of recursion for initialization of DP grid -> It can be done by
+  a) Initialization of 1st row
+  b) Initialization of 1st column
+  c) Initialization of diagonal
+  d) Initialization of only 1st cell
+2) Write nested loop -> state deciding factor in prev. recussive code( ex : deciding factor is 2 for lenghth and weight in 0/1 knapsack)
+3) Use choices to fill DP array(inside loop)
+4) Reverse the direction
+5) Use optimal condition to get answer 
+
+-------------------------------------------------------------------------------------------------------------------
+while generating 1d dp, for some problem, we do 
+1) //Use forward loop
+  for (int coin : coins) { 
+    for (int t = coin; t <= V; t++) { 
+      dp[t] += dp[t - coin]; 
+    }
+  } 
+
+and for some problem, we do 
+2) //Use backward loop
+  for (int coin : coins) { 
+    for (int t = V; t >= 0; t--) { 
+      dp[t] += dp[t - coin]; 
+    } 
+  }
+Case 1): Infinite Supply (Unbounded Knapsack / Coin Change - Ways)
+You can use each coin as many times as you want. so Use forward loop
+
+Case 2): Single Use (0/1 Knapsack or Subset Sum)
+Each element can be used at most once. so Use backward loop
