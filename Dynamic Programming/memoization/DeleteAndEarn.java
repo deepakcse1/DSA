@@ -1,33 +1,25 @@
 package memoization;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class DeleteAndEarn {
   public int deleteAndEarn(int[] nums) {
-    Map<Integer, Integer> map = new HashMap<>();
-    List<Integer> list = new ArrayList<>();
-    Arrays.sort(nums);
+    int max = 0;
     for (int i : nums) {
-      map.put(i, map.getOrDefault(i, 0) + 1);
-      if (list.size() == 0 || list.get(list.size() - 1) != i) {
-        list.add(i);
-      }
+      max = Math.max(i, max);
     }
-    Integer[] dp = new Integer[list.size()];
-    return helper(0, list, map, dp);
+    int[] points = new int[max + 1];
+    for (int i : nums) {
+      points[i] += i;
+    }
+    int n = points.length;
+    Integer[] dp = new Integer[n];
+    return helper(0, points, dp);
   }
 
-  public int helper(int in, List<Integer> list, Map<Integer, Integer> map, Integer[] dp) {
-    if (in >= list.size()) return 0;
-    if (dp[in] != null) return dp[in];
-    int next = in + 1;
-    if (in + 1 < list.size() && list.get(in + 1) == list.get(in) + 1) next = in + 2;
-    int take = list.get(in) * map.get(list.get(in)) + helper(next, list, map, dp);
-    int notTake = helper(in + 1, list, map, dp);
-    return dp[in] = Math.max(take, notTake);
+  private int helper(int idx, int[] points, Integer[] dp) {
+    if (idx >= points.length) return 0;
+    if (dp[idx] != null) return dp[idx];
+    int take = points[idx] + helper(idx + 2, points, dp);
+    int notTake = helper(idx + 1, points, dp);
+    return dp[idx] = Math.max(take, notTake);
   }
 }
