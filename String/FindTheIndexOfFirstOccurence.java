@@ -13,11 +13,8 @@ public class FindTheIndexOfFirstOccurence {
         lps[i] = len; 
         i++;
       } else {
-        if (len == 0)
-          i++;
-        else {
-          len = lps[len - 1];
-        }
+        if (len == 0) i++;
+        else len = lps[len - 1];
       }
     }
     return lps;
@@ -37,13 +34,10 @@ public class FindTheIndexOfFirstOccurence {
       if (haystack.charAt(i) == needle.charAt(j)) {
         i++;
         j++;
-        if (j == n)
-          return i - n; // whole pattern is matched
+        if (j == n) return i - n; // whole pattern is matched
       } else {
-        if (j == 0)
-          i++;
-        else
-          j = lps[j - 1];
+        if (j == 0) i++;
+        else j = lps[j - 1];
       }
     }
     return -1;
