@@ -1,6 +1,26 @@
 package SlidingWindow;
 
 public class MinimumWindowSubstring {
+// 1. Fixed Window(Find All Anagrams, Permutation in String, Maximum Average Subarray, Maximum Vowels)
+// Expand
+//    ↓
+// Shrink if window>K
+//    ↓
+// Check
+//------------------------------------
+// 2. Variable Window (Longest, Fruit Into Baskets)
+// Expand
+//    ↓
+// While invalid -> Shrink
+//    ↓
+// Update answer
+//----------------------------------
+// 3. Variable Window (Minimum)
+// Expand
+//    ↓
+// While valid -> Update answer
+//    ↓
+// Shrink
   public static void main(String[] args) {
     System.out.println(minWindow("ADOBECODEBANC", "ABC"));
   }
@@ -18,6 +38,7 @@ public class MinimumWindowSubstring {
     for (int i = 0; i < s.length(); i++) {
       if (freq[s.charAt(i)] > 0) count++; //increase count
       freq[s.charAt(i)]--;
+      
       while (count == t.length()) {
         if ((i - left + 1) < minLen) {
           minLen = i - left + 1;

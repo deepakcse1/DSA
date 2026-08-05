@@ -22,9 +22,8 @@ public class FindTheIndexOfFirstOccurence {
 
   public int strStr(String haystack, String needle) {
     // KMP - Knuth-Morris-Pratt algo
-    char[] pattern = needle.toCharArray();
     // 1. build LPS
-    int[] lps = buildLPS(pattern);
+    int[] lps = buildLPS(needle.toCharArray());
     // 2. Perform KMP search using LPS array
     int i = 0; // haystack
     int j = 0; // needle
@@ -44,23 +43,21 @@ public class FindTheIndexOfFirstOccurence {
   }
 
     //Brute Force O(n*m)
-    // public int strStr(String haystack, String needle) {
+    //public int strStr(String haystack, String needle) {
     //     int m = haystack.length();
     //     int n = needle.length();
     //     if(n > m) return -1;
+    //     int startIdx = -1;
     //     for(int i = 0; i <= m-n; i++){
-    //         // Without extra space------------------------------------
-    //         int j = 0;
-    //         while(j < n && haystack.charAt(i+j) == needle.charAt(j)){
-    //             j++;
+    //         if(haystack.charAt(i) == needle.charAt(0)){
+    //             int j = 0;
+    //             while(j < n){
+    //                 if(haystack.charAt(i + j) != needle.charAt(j)) break; 
+    //                 j++;
+    //             }
+    //             if(j == n) return i;
     //         }
-    //         if(j == n) return i;
-
-    //         //Extra space taken-----------------------------------------
-    //         // if(haystack.charAt(i) == needle.charAt(0)){
-    //         //     if(i+n <= m && haystack.substring(i, i+n).equals(needle)) return i;
-    //         // }
     //     }
-    //     return -1;
+    //     return startIdx;
     // }
 }
