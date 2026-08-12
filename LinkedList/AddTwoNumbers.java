@@ -1,8 +1,47 @@
 package LinkedList;
 
+class ListNode{
+  int val;
+  ListNode next;
+  ListNode() {
+  }
+  ListNode(int val) {
+    this.val = val;
+  }
+  ListNode(int val, ListNode next) {
+    this.val = val;
+    this.next = next;
+  }
+}
 public class AddTwoNumbers {
   public static void main(String[] args) {
     
+  }
+
+  public ListNode addTwoNumbers_elegant(ListNode l1, ListNode l2) {
+    ListNode move1 = l1;
+    ListNode move2 = l2;
+    ListNode dummy = new ListNode(-1);
+    ListNode prev = dummy;
+    int carry = 0;
+    while (move1 != null || move2 != null) {
+      int sum = carry;
+      if (move1 != null) sum += move1.val;
+      if (move2 != null) sum += move2.val;
+      carry = sum / 10;
+      ListNode newNode = new ListNode(sum % 10);
+      prev.next = newNode;
+      prev = newNode;
+      if (move1 != null) move1 = move1.next;
+      if (move2 != null) move2 = move2.next;
+    }
+
+    if (carry > 0) {
+      ListNode newNode = new ListNode(carry);
+      prev.next = newNode;
+      prev.next = newNode;
+    }
+    return dummy.next;
   }
 
   public ListNode addTwoNumbers(ListNode l1, ListNode l2) {

@@ -18,9 +18,11 @@ public class MinimumWindowSubstring {
 // 3. Variable Window (Minimum)
 // Expand
 //    ↓
-// While valid -> Update answer
-//    ↓
-// Shrink
+// While valid(){
+//   if(min condition satisfy) Update answer
+//   Shrink
+//}
+
   public static void main(String[] args) {
     System.out.println(minWindow("ADOBECODEBANC", "ABC"));
   }
@@ -51,4 +53,31 @@ public class MinimumWindowSubstring {
     }
     return (stIndex == -1) ? "" : s.substring(stIndex, stIndex + minLen);
   }
+
+  //Brute Force
+  // public String minWindow(String s, String t) {
+  //       int m = s.length();
+  //       int n = t.length();
+  //       if(n > m) return "";
+  //       String result = "";
+  //       int minCount = Integer.MAX_VALUE;
+  //       for(int i = 0; i < m; i++){
+  //           int[] freq = new int[128];
+  //           for(char c : t.toCharArray()){
+  //               freq[c]++;
+  //           }
+  //           int matched = 0;
+  //           StringBuilder curr = new StringBuilder();
+  //           for(int j = i; j < m; j++){
+  //               if(freq[s.charAt(j)] > 0) matched++;
+  //               freq[s.charAt(j)]--;
+  //               if(matched == n && j+1-i < minCount){
+  //                   minCount = j+1-i;
+  //                   result = s.substring(i, j+1);
+  //                   break;
+  //               }
+  //           }
+  //       }
+  //       return result;
+  //   }
 }

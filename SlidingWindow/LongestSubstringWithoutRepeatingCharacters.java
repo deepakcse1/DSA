@@ -25,23 +25,68 @@ public class LongestSubstringWithoutRepeatingCharacters {
   public static void main(String[] args) {
     
   }
-  //if map has the key && the key's index came after start,
-  // move the start to key's index +1
-  // normally, put the key and its index in the map
-  // update the max length by comparing current max and (i - start +1)
-    
-  public int lengthOfLongestSubstring(String s) {
-    int max = 0;
-    int start = 0;
-    Map<Character, Integer> map = new HashMap<>();
-    for (int i = 0; i < s.length(); i++) {
-      char key = s.charAt(i);
-      if (map.containsKey(key) && map.get(key) >= start) {
-        start = map.get(key) + 1;
-      }
-      map.put(key, i);
-      max = Math.max(max, (i - start + 1));
+  // public int lengthOfLongestSubstring(String s) {
+  //   int maxSub = 0;
+  //   int n = s.length();
+  //   Set<Character> set = new HashSet<>();
+  //   int left = 0;
+  //   for (int right = 0; right < n; right++) {
+  //     char key = s.charAt(right);
+  //     while (set.contains(key)) {
+  //       set.remove(s.charAt(left));
+  //       left++;
+  //     }
+  //     set.add(key);
+  //     maxSub = Math.max(maxSub, right - left + 1);
+  //   }
+  //   return maxSub;
+  // }
+  // public int lengthOfLongestSubstring(String s) {
+    //     int maxSub = 0;
+    //     int n = s.length();
+    //     for(int i = 0; i < n; i++){
+    //         Set<Character> set = new HashSet<>();
+    //         for(int j = i; j < n; j++){
+    //             char key = s.charAt(j);
+    //             if(!set.contains(key)){
+    //                 set.add(key);
+    //                 if(set.size() > maxSub) maxSub = set.size();
+    //             }
+    //             else break;
+    //         }
+    //     }
+    //     return maxSub;
+    // }
+
+    //---------------- Anothe Approach ---------------------------
+    public int lengthOfLongestSubstring(String s) {
+        int n = s.length();
+        int max = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        int left = 0;
+        for(int right = left; right < n; right++){
+            char key = s.charAt(right);
+            if(map.containsKey(key) && map.get(key) >= left){
+                left = map.get(key) + 1;
+            }
+            map.put(key, right);
+            max = Math.max(max, right - left + 1);
+        }
+        return max;
     }
-    return max;
-  }
+    //---------- Brute Force -------------------
+    // public int lengthOfLongestSubstring(String s) {
+    //     int n = s.length();
+    //     int max = 0;
+    //     for(int i = 0; i < n; i++){
+    //         Map<Character, Integer> map = new HashMap<>();
+    //         for(int j = i; j < n; j++){
+    //             char key = s.charAt(j);
+    //             if(map.containsKey(key)) break;
+    //             map.put(key, j);
+    //             max = Math.max(max, j - i + 1);
+    //         }
+    //     }
+    //     return max;
+    // }
 }

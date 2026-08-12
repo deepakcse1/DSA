@@ -3,51 +3,47 @@ package String;
 public class CountAndSay {
   //Iterative approach
   public String countAndSay(int n) {
-    if (n == 1) return "1";
-    StringBuilder result = new StringBuilder("1");
+    StringBuilder res = new StringBuilder("1");
     for (int k = 2; k <= n; k++) {
-      int i = 0;
-      int len = result.length();
-      StringBuilder curr = new StringBuilder();
-      while (i < len) {
-        int count = 1;
-        char c = result.charAt(i);
-        int j = i;
-        while (j + 1 < len && result.charAt(j + 1) == c) {
+      int left = 0;
+      int len = res.length();
+      StringBuilder say = new StringBuilder();
+      while (left < len) {
+        char currChar = res.charAt(left);
+        int count = 0;
+        int right = left;
+        while (right < len && res.charAt(right) == currChar) {
           count++;
-          j++;
+          right++;
         }
-        curr.append(count);
-        curr.append(c);
-        i = j + 1;
+        say.append(count);
+        say.append(currChar);
+        left = right;
       }
-      result = curr;
+      res = say;
     }
-    return result.toString();
+    return res.toString();
   }
 
   //recursive approach
   // public String countAndSay(int n) {
-  //    return helper(n);
+  //   if (n == 1) return "1";
+  //   String say = countAndSay(n - 1);
+  //   int left = 0;
+  //   int len = say.length();
+  //   StringBuilder ans = new StringBuilder();
+  //   while (left < len) {
+  //     int count = 0;
+  //     char currChar = say.charAt(left);
+  //     int right = left;
+  //     while (right < len && say.charAt(right) == currChar) {
+  //       count++;
+  //       right++;
+  //     }
+  //     ans.append(count);
+  //     ans.append(currChar);
+  //     left = right;
+  //   }
+  //   return ans.toString();
   // }
-  // private String helper(int n){
-    //     if(n == 1) return "1";
-    //     String say = helper(n-1);
-    //     int i = 0;
-    //     int len = say.length();
-    //     StringBuilder sb = new StringBuilder();
-    //     while(i < len){
-    //         int count = 1;
-    //         char c = say.charAt(i);
-    //         int j = i;
-    //         while(j+1 < len && say.charAt(j+1) == c){
-    //             count++;
-    //             j++;
-    //         }
-    //         sb.append(count);
-    //         sb.append(c);
-    //         i = j+1;
-    //     }
-    //     return sb.toString();
-    // }
 }

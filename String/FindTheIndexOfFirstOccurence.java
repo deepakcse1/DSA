@@ -43,21 +43,20 @@ public class FindTheIndexOfFirstOccurence {
   }
 
     //Brute Force O(n*m)
-    //public int strStr(String haystack, String needle) {
-    //     int m = haystack.length();
-    //     int n = needle.length();
-    //     if(n > m) return -1;
-    //     int startIdx = -1;
-    //     for(int i = 0; i <= m-n; i++){
-    //         if(haystack.charAt(i) == needle.charAt(0)){
-    //             int j = 0;
-    //             while(j < n){
-    //                 if(haystack.charAt(i + j) != needle.charAt(j)) break; 
-    //                 j++;
-    //             }
-    //             if(j == n) return i;
-    //         }
+    // public int strStr(String haystack, String needle) {
+    //   int m = haystack.length();
+    //   int n = needle.length();
+    //   int i = 0;
+    //   while (i <= m - n) {
+    //     if (haystack.charAt(i) == needle.charAt(0)) {
+    //       int j = 0;
+    //       while (j < n) {
+    //         if (haystack.charAt(i + j) != needle.charAt(j++)) break;
+    //         if (j == n) return i;
+    //       }
     //     }
-    //     return startIdx;
+    //     i++;
+    //   }
+    //   return -1;
     // }
 }
