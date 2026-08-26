@@ -1,0 +1,4 @@
+i = j + c //left to right diagonal
+i + j = c // right to left diagonal
+
+to repeat -> use % 

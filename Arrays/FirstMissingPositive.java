@@ -10,16 +10,14 @@ public class FirstMissingPositive {
     // Mark the presence
     for (int i = 0; i < n; i++) {
       int num = Math.abs(nums[i]);
-      if (num == n + 1)
-        continue;
+      if (num == n + 1) continue;
       if (nums[num - 1] >= 0) {
         nums[num - 1] = -nums[num - 1];
       }
     }
     // find the first missing positive
     for (int i = 0; i < n; i++) {
-      if (nums[i] >= 0)
-        return i + 1;
+      if (nums[i] >= 0) return i + 1;
     }
     return n + 1;
   }

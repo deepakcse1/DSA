@@ -1,4 +1,4 @@
-package BinaryTree;
+package WeeklyContest;
 
 public class WeightedSumOfATree {
   public long weightedSum(int[] parent, int[] nums) {
@@ -19,7 +19,7 @@ public class WeightedSumOfATree {
   }
 
   private int helper(int node, int[] parent, int[] depth) {
-    if (parent[node] == -1) return 1;
+    if (node == -1) return 1;
     if (depth[node] != 0) return depth[node];
     return depth[node] = helper(parent[node], parent, depth) + 1;
   }

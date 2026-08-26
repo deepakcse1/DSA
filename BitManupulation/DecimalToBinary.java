@@ -10,6 +10,6 @@ public class DecimalToBinary {
     return sb.reverse().toString();
   }
   public static void main(String[] args) {
-    System.out.println(decimalToBinary(13));
+    System.out.println(decimalToBinary(43261596));
   }
 }

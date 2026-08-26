@@ -11,11 +11,11 @@ public class SubarraySumDivisibleByK {
     map.put(0, 1);
     for (int i : nums) {
       sum += i;
-      int rem = ((sum % k) + k) % k;
-      if (map.containsKey(rem)) {
-        count += map.get(rem);
+      int mod = ((sum % k) + k) % k;
+      if (map.containsKey(mod)) {
+        count += map.get(mod);
       }
-      map.put(rem, map.getOrDefault(rem, 0) + 1);
+      map.put(mod, map.getOrDefault(mod, 0) + 1);
     }
     return count;
   }
