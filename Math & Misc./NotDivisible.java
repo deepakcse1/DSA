@@ -1,8 +1,8 @@
-// package CodeForces_Template;
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-public class Main{
+public class NotDivisible {
   static class FastScanner {
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private String[] tokens;
@@ -21,20 +21,6 @@ public class Main{
       return Long.parseLong(next());
     }
   }
-  
-  // private static int solve_naive(int N) {
-  //   for (int i = 1; i <= N; i++) {
-  //     boolean flag = false;
-  //     for (int j = 1; j <= N; j++) {
-  //       if (i != j && arr[i] % arr[j] == 0) {
-  //         flag = true;
-  //         break;
-  //       }
-  //     }
-  //     if (!flag)
-  //       count++;
-  //   }
-  // }
   public static void main(String[] args) throws Exception {
     FastScanner fs = new FastScanner();
     int N = fs.nextInt();
