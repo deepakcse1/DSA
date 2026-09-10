@@ -1,8 +1,10 @@
-// package CodeForces_Template;
-import java.io.*;
-import java.util.*;
+package Number_System;
 
-public class Main{
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Coprime {
   static class FastScanner {
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private String[] tokens;
@@ -21,14 +23,12 @@ public class Main{
       return Long.parseLong(next());
     }
   }
-
-
-  private static int MAX = 1_000_00;
-
-  private static int[] spf = new int[MAX+1];
+  
+  static int MAX = 1_000_000;
+  static int[] spf = new int[MAX+1];
   private static void build_spf(){
-    for(int i = 2; i <= MAX; i++){
-      spf[i] = i;
+    for(int i = 2; i < MAX; i++){
+    spf[i] = i;
     }
     for(int i = 2; i*i <= MAX; i++){
       if(spf[i] == i){
@@ -40,42 +40,47 @@ public class Main{
       }
     }
   }
-  public static void main(String[] args) throws Exception {
-    FastScanner fs = new FastScanner();
-    int n = fs.nextInt();
-    int m = fs.nextInt();
-    int[] arr = new int[n];
-    for (int i = 0; i < n; i++) {
-        arr[i] = fs.nextInt();
+
+ private static int gcd(int a, int b){
+    while(b != 0){
+      int temp = b;
+      b = a % b;
+      a = temp;
     }
+    return a;
+ }
+
+  public static void main(String[] args) throws Exception {
     build_spf();
-    boolean[] badPrimes = new boolean[MAX+1];
-    for(int x : arr){
+    FastScanner fs = new FastScanner();
+    int N = fs.nextInt();
+    int[] arr = new int[N];
+    for(int i = 0; i < N; i++){
+      arr[i] = fs.nextInt();
+    }
+    int g = arr[0];
+    for(int i = 1; i < N; i++){
+      g = gcd(g, arr[i]);
+    }
+    if(g > 1){
+      System.out.println("not coprime");
+      return;
+    }
+    boolean[] bad = new boolean[MAX+1];
+    for(int i = 0; i < N; i++){
+      int x = arr[i];
       while(x > 1){
         int p = spf[x];
-        badPrimes[p] = true;
+        if(bad[p]){
+          System.out.println("setwise coprime");
+          return;
+        }
+        bad[p] = true;
         while(x % p == 0){
           x /= p;
         }
       }
     }
-    boolean[] bad = new boolean[m+1];
-    for(int p = 2; p <= m; p++){
-      if(badPrimes[p]){
-        for(int j = p; j <= m; j += p){
-          bad[j] = true;
-        }
-      }
-    }
-    List<Integer> list = new ArrayList<>();
-    for(int i = 1; i <= m; i++){
-      if(!bad[i]){
-        list.add(i);
-      }
-    }
-    System.out.println(list.size());
-    for(int i : list){
-      System.out.println(i);
-    }
+    System.out.println("pairwise coprime");
   }
 }

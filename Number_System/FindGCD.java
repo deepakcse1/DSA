@@ -7,15 +7,15 @@ public class FindGCD {
   }
 
   private static int gcd_iterative(int a, int b){
-    while(a != 0){
-      int temp = b % a;
-      b = a;
-      a = temp;
+    while(b != 0){
+      int temp = a % b;
+      a = b;
+      b = temp;
     }
-    return b;
+    return a;
   }
   public static void main(String[] args) {
-    int a = 16, b = 32;
+    int a = 20, b = 15;
     System.out.println(gcd_iterative(a, b));
   }
 }

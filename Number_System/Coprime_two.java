@@ -1,8 +1,12 @@
-// package CodeForces_Template;
-import java.io.*;
-import java.util.*;
+package Number_System;
 
-public class Main{
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Coprime_two {
   static class FastScanner {
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private String[] tokens;
@@ -21,54 +25,55 @@ public class Main{
       return Long.parseLong(next());
     }
   }
+  
+  static int MAX = 1_000_00;
+  static int[] spf = new int[MAX+1];
 
-
-  private static int MAX = 1_000_00;
-
-  private static int[] spf = new int[MAX+1];
+  //Build SPF
   private static void build_spf(){
-    for(int i = 2; i <= MAX; i++){
+    for (int i = 2; i <= MAX; i++) {
       spf[i] = i;
     }
-    for(int i = 2; i*i <= MAX; i++){
-      if(spf[i] == i){
-        for(int j = i*i; j <= MAX; j += i){
-          if(spf[j] == j){
+    for (int i = 2; i*i <= MAX; i++) {
+      if (spf[i] == i) {
+        for (int j = i*i ; j <= MAX; j += i) {
+          if (spf[j] == j) {
             spf[j] = i;
           }
         }
       }
     }
   }
+
   public static void main(String[] args) throws Exception {
-    FastScanner fs = new FastScanner();
-    int n = fs.nextInt();
-    int m = fs.nextInt();
-    int[] arr = new int[n];
-    for (int i = 0; i < n; i++) {
-        arr[i] = fs.nextInt();
-    }
     build_spf();
-    boolean[] badPrimes = new boolean[MAX+1];
+    FastScanner fs = new FastScanner();
+    int N = fs.nextInt();
+    int M = fs.nextInt();
+    int[] arr = new int[N];
+    for(int i = 0; i < N; i++){
+      arr[i] = fs.nextInt();
+    }
+    boolean[] badPrime = new boolean[MAX+1];
     for(int x : arr){
       while(x > 1){
         int p = spf[x];
-        badPrimes[p] = true;
+        badPrime[p] = true;
         while(x % p == 0){
           x /= p;
         }
       }
     }
-    boolean[] bad = new boolean[m+1];
-    for(int p = 2; p <= m; p++){
-      if(badPrimes[p]){
-        for(int j = p; j <= m; j += p){
-          bad[j] = true;
+    boolean[] bad = new boolean[M+1];
+    for(int p = 2; p <= M; p++){
+      if(badPrime[p]){
+        for(int k = p; k <= M; k += p){
+          bad[k] = true;
         }
       }
     }
     List<Integer> list = new ArrayList<>();
-    for(int i = 1; i <= m; i++){
+    for(int i = 1; i <= M; i++){
       if(!bad[i]){
         list.add(i);
       }

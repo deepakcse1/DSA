@@ -59,14 +59,12 @@ public class PairedCube {
     StringBuilder comp = new StringBuilder();
     for (int p : map.keySet()) {
       int exp = map.get(p) % 3;
-      if (exp == 0)
-        continue;
+      if (exp == 0) continue;
       int complement = (exp == 1) ? 2 : (exp == 2) ? 1 : 0;
-      sign.append(p).append(":").append(exp).append(",");
-      comp.append(p).append(":").append(complement).append(",");
+      sign.append(p+":").append(exp+",");
+      comp.append(p+":").append(complement+",");
     }
-    if (sign.length() == 0)
-      return new String[] { "", "" };
+    if (sign.length() == 0) return new String[] { "", "" };
     String s = sign.substring(0, sign.length() - 1);
     String c = comp.substring(0, comp.length() - 1);
     return new String[] { s, c };
@@ -76,13 +74,11 @@ public class PairedCube {
     FastScanner fs = new FastScanner();
     int n = fs.nextInt();
     int[] arr = new int[n];
-    for (int i = 0; i < n; i++) {
-      int x = fs.nextInt();
-      arr[i] = x;
-    }
     int max = 0;
-    for (int i : arr) {
-      max = Math.max(max, i);
+    for(int i = 0; i < n; i++){
+        int x = fs.nextInt();
+        max = Math.max(max, x);
+        arr[i] = x;
     }
     build_spf(max);
     Map<String, Integer> freq = new HashMap<>();
