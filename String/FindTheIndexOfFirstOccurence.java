@@ -4,9 +4,9 @@ public class FindTheIndexOfFirstOccurence {
   private int[] buildLPS(char[] pattern) {
     int len = 0;
     int i = 1;
-    int n = pattern.length;
-    int[] lps = new int[n];
-    while (i < n) {
+    int m = pattern.length;
+    int[] lps = new int[m];
+    while (i < m) {
       if (pattern[len] == pattern[i]) {
         len++;
         // lps[i] stores the length of the longest proper prefix which is also a suffix for the substring patter [0...i]

@@ -4,60 +4,71 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LongestSubarrayWithAtMostKDistinctPrimeFactors {
-  public int longestSubarray(int[] nums, int k) {
-    // create SPF
+
+  private int[] spf;
+  private void build_spf(int MAX) {
+    spf = new int[MAX + 1];
+    for (int i = 2; i <= MAX; i++) {
+      spf[i] = i;
+    }
+    for (int i = 2; i <= MAX / i; i++) {
+      if (spf[i] == i) {
+        for (long j = i * i; j <= MAX; j += i) {
+          if (spf[(int) j] == (int) j) spf[(int) j] = i;
+        }
+      }
+    }
+  }
+
+  List<Integer>[] list;
+
+  private void buildFactorList(int max, int[] nums) {
+    list = new ArrayList[max + 1];
+    for (int num : nums) {
+      list[num] = new ArrayList<>();
+      int x = num;
+      while (x > 1) {
+        int p = spf[x];
+        list[num].add(p);
+        while (x % p == 0) {
+          x /= p;
+        }
+      }
+    }
+  }
+
+  private int slidingWindow(int max, int[] nums, int k) {
     int n = nums.length;
+    int left = 0;
+    int count = 0;
+    int longestSub = 0;
+    int[] freq = new int[max + 1];
+    for (int right = 0; right < n; right++) {
+      int digit = nums[right];
+      for (int p : list[digit]) {
+        if (freq[p] == 0) count++;
+        freq[p]++;
+      }
+      while (count > k) {
+        int currDigit = nums[left];
+        for (int p : list[currDigit]) {
+          freq[p]--;
+          if (freq[p] == 0) count--;
+        }
+        left++;
+      }
+      longestSub = Math.max(longestSub, right - left + 1);
+    }
+    return longestSub;
+  }
+
+  public int longestSubarray(int[] nums, int k) {
     int max = 0;
     for (int i : nums) {
       max = Math.max(max, i);
     }
-    // building SPF
-    int[] spf = new int[max + 1];
-    for (int i = 0; i <= max; i++) {
-      spf[i] = i;
-    }
-    // Using a sieve-like approach, store the smallest prime factor for every
-    // composite number.
-    for (int i = 2; i * i <= max; i++) {
-      if (spf[i] == i) {
-        for (int j = i * i; j <= max; j += i) {
-          if (spf[j] == j) spf[j] = i;
-        }
-      }
-    }
-
-    List<Integer>[] factors = new ArrayList[n];
-    for (int i = 0; i < n; i++) {
-      factors[i] = new ArrayList<>();
-      int val = nums[i];
-      while (val > 1) {
-        int p = spf[val];
-        factors[i].add(p);
-        while (val % p == 0) {
-          val /= p;
-        }
-      }
-    }
-
-    int[] freq = new int[max + 1];
-    int left = 0;
-    int count = 0;
-    int resMax = 0;
-    for (int right = 0; right < n; right++) {
-      for (int p : factors[right]) {
-        if (freq[p] == 0) count++;
-        freq[p]++;
-      }
-
-      while (count > k) {
-        for (int p : factors[left]) {
-          if (freq[p] == 1) count--;
-          freq[p]--;
-        }
-        left++;
-      }
-      resMax = Math.max(resMax, right - left + 1);
-    }
-    return resMax;
+    build_spf(max);
+    buildFactorList(max, nums);
+    return slidingWindow(max, nums, k);
   }
 }

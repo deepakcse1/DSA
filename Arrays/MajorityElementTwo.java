@@ -11,10 +11,12 @@ public class MajorityElementTwo {
       else if (count1 == 0) {
         el1 = i;
         count1++;
-      } else if (count2 == 0) {
+      } 
+      else if (count2 == 0) {
         el2 = i;
         count2++;
-      } else {
+      } 
+      else {
         count1--;
         count2--;
       }

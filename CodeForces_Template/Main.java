@@ -20,17 +20,17 @@ public class Main{
     long nextLong() throws IOException {
       return Long.parseLong(next());
     }
+    String nextLine() throws IOException {
+      return br.readLine();
+    }
   }
-
-
-  private static int MAX = 1_000_00;
-
-  private static int[] spf = new int[MAX+1];
-  private static void build_spf(){
+  static int MAX = 1_000_00;
+  static int[] spf = new int[MAX+1];
+  private static void buildSPF(){
     for(int i = 2; i <= MAX; i++){
       spf[i] = i;
     }
-    for(int i = 2; i*i <= MAX; i++){
+    for(int i = 2; i * i <= MAX; i++){
       if(spf[i] == i){
         for(int j = i*i; j <= MAX; j += i){
           if(spf[j] == j){
@@ -41,19 +41,19 @@ public class Main{
     }
   }
   public static void main(String[] args) throws Exception {
+    buildSPF();
     FastScanner fs = new FastScanner();
     int n = fs.nextInt();
     int m = fs.nextInt();
     int[] arr = new int[n];
-    for (int i = 0; i < n; i++) {
-        arr[i] = fs.nextInt();
+    for(int i = 0; i < n; i++){
+      arr[i] = fs.nextInt();
     }
-    build_spf();
-    boolean[] badPrimes = new boolean[MAX+1];
+    boolean[] badPrime = new boolean[MAX+1];
     for(int x : arr){
-      while(x > 1){
+      while (x > 1) {
         int p = spf[x];
-        badPrimes[p] = true;
+        badPrime[p] = true;
         while(x % p == 0){
           x /= p;
         }
@@ -61,21 +61,22 @@ public class Main{
     }
     boolean[] bad = new boolean[m+1];
     for(int p = 2; p <= m; p++){
-      if(badPrimes[p]){
-        for(int j = p; j <= m; j += p){
-          bad[j] = true;
+      if(badPrime[p]){
+        for(int k = p; k <= m; k += p){
+          bad[k] = true;
         }
       }
     }
+
     List<Integer> list = new ArrayList<>();
     for(int i = 1; i <= m; i++){
-      if(!bad[i]){
-        list.add(i);
-      }
+      if(!bad[i]) list.add(i);
     }
+
     System.out.println(list.size());
     for(int i : list){
       System.out.println(i);
     }
+    // System.out.println();
   }
 }
