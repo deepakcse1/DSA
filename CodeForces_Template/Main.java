@@ -24,9 +24,10 @@ public class Main{
       return br.readLine();
     }
   }
-  static int MAX = 1_000_00;
-  static int[] spf = new int[MAX+1];
-  private static void buildSPF(){
+  // static int MAX = 1_000_00;
+  static int[] spf;
+  private static void buildSPF(int MAX){
+    spf = new int[MAX+1];
     for(int i = 2; i <= MAX; i++){
       spf[i] = i;
     }
@@ -41,15 +42,18 @@ public class Main{
     }
   }
   public static void main(String[] args) throws Exception {
-    buildSPF();
     FastScanner fs = new FastScanner();
     int n = fs.nextInt();
     int m = fs.nextInt();
     int[] arr = new int[n];
+    int max = 0;
     for(int i = 0; i < n; i++){
       arr[i] = fs.nextInt();
+      max = Math.max(max, arr[i]);
     }
-    boolean[] badPrime = new boolean[MAX+1];
+    max = Math.max(max, m);
+    buildSPF(max);
+    boolean[] badPrime = new boolean[max+1];
     for(int x : arr){
       while (x > 1) {
         int p = spf[x];

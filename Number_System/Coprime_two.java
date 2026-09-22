@@ -26,11 +26,10 @@ public class Coprime_two {
     }
   }
   
-  static int MAX = 1_000_00;
-  static int[] spf = new int[MAX+1];
-
   //Build SPF
-  private static void build_spf(){
+  static int[] spf;
+  private static void build_spf(int MAX){
+    spf = new int[MAX+1];
     for (int i = 2; i <= MAX; i++) {
       spf[i] = i;
     }
@@ -46,15 +45,18 @@ public class Coprime_two {
   }
 
   public static void main(String[] args) throws Exception {
-    build_spf();
     FastScanner fs = new FastScanner();
     int N = fs.nextInt();
     int M = fs.nextInt();
     int[] arr = new int[N];
+    int max = Integer.MIN_VALUE;
     for(int i = 0; i < N; i++){
       arr[i] = fs.nextInt();
+      max = Math.max(max, arr[i]);
     }
-    boolean[] badPrime = new boolean[MAX+1];
+    max = Math.max(max, M);
+    build_spf(max);
+    boolean[] badPrime = new boolean[max+1];
     for(int x : arr){
       while(x > 1){
         int p = spf[x];

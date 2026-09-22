@@ -1,4 +1,4 @@
-package HashMap;
+package Map.HashMap;
 
 public class MapImpl {
   public static void main(String[] args) {

@@ -7,6 +7,7 @@ public class CountShadowPairs_one {
     int top = 0;
     int[] stack = new int[n];
     for (int i : nums) {
+      // binary search
       int start = 0;
       int end = top;
       while (start < end) {
@@ -24,11 +25,11 @@ public class CountShadowPairs_one {
   // int n = nums.length;
   // int count = 0;
   // for(int i = 0; i < n-1; i++){
-  // int min = nums[i];
-  // for(int j = i+1; j < n; j++){
-  // if(nums[i] < nums[j] && min == nums[i]) count++;
-  // min = Math.min(min, nums[j]);
-  // }
+  //   int min = nums[i];
+  //   for(int j = i+1; j < n; j++){
+  //     if(nums[i] < nums[j] && min == nums[i]) count++;
+  //     min = Math.min(min, nums[j]);
+  //   }
   // }
   // return count;
   // }

@@ -1,4 +1,4 @@
-package HashMap;
+package Map.HashMap;
 
 public class MapNode<K,V> {
   K key;

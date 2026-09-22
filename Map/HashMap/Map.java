@@ -1,6 +1,5 @@
-package HashMap;
-
-import java.util.ArrayList;
+package Map.HashMap;
+import java.util.*;
 
 public class Map<K, V> {
   ArrayList<MapNode<K,V>> buckets;
