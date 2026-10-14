@@ -31,3 +31,19 @@ public class Dota2Senate {
     return radiant.isEmpty() ? "Dire" : "Radiant";
   }
 }
+
+// Adding n represents the senator's next turn in the next round. For example, index 0 becomes 0 + n, meaning that senator acts after all senators in the current cycle.
+
+// Comparing the indices tells us who acts first:
+
+// If r < d, Radiant acts first and bans Dire.
+
+// Otherwise, Dire acts first and bans Radiant.
+
+// 4. Complexity
+
+// Let n be the length of senate.
+
+// Time: O(n) — each senator is processed at most once as a survivor per round; each ban removes one senator, so there are at most n ban operations.
+
+// Space: O(n) — the two queues store the active senators.

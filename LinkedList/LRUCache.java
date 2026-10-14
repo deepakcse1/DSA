@@ -1,12 +1,6 @@
 package LinkedList;
-
 import java.util.HashMap;
-
 import java.util.Map;
-
-public class LRU_Cache {
-
-}
 
 class ListNode {
   int key;

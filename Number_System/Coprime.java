@@ -28,7 +28,7 @@ public class Coprime {
   static int[] spf = new int[MAX+1];
   private static void build_spf(){
     for(int i = 2; i < MAX; i++){
-    spf[i] = i;
+      spf[i] = i;
     }
     for(int i = 2; i*i <= MAX; i++){
       if(spf[i] == i){

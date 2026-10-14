@@ -12,21 +12,21 @@ public class SlidingWindowMaximum {
       System.out.print(num + " ");  
     }
   }
-  
+   
   //brute force
-  public static  int[] maxSlidingWindow(int[] nums, int k) {
-    List<Integer> list = new ArrayList<>();
-    for (int i = 0; i <= nums.length - k; i++) {
-      int max = Integer.MIN_VALUE;
-      for (int j = i; j < (i + k); j++) {
-        if (max < nums[j]) max = nums[j];
-      }
-      list.add(max);
-    }
-    int[] ans = new int[list.size()];
-    for (int i = 0; i < list.size(); i++) ans[i] = list.get(i);
-    return ans;
-  }
+  // public static  int[] maxSlidingWindow(int[] nums, int k) {
+  //   List<Integer> list = new ArrayList<>();
+  //   for (int i = 0; i <= nums.length - k; i++) {
+  //     int max = Integer.MIN_VALUE;
+  //     for (int j = i; j < (i + k); j++) {
+  //       if (max < nums[j]) max = nums[j];
+  //     }
+  //     list.add(max);
+  //   }
+  //   int[] ans = new int[list.size()];
+  //   for (int i = 0; i < list.size(); i++) ans[i] = list.get(i);
+  //   return ans;
+  // }
 
   public static int[] maxSlidingWindow_Optimized(int[] nums, int k) {
     int n = nums.length;

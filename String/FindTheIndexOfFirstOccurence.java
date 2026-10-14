@@ -2,19 +2,19 @@ package String;
 
 public class FindTheIndexOfFirstOccurence {
   private int[] buildLPS(char[] pattern) {
-    int len = 0;
+    int j = 0;
     int i = 1;
     int m = pattern.length;
     int[] lps = new int[m];
     while (i < m) {
-      if (pattern[len] == pattern[i]) {
-        len++;
+      if (pattern[j] == pattern[i]) {
+        j++;
         // lps[i] stores the length of the longest proper prefix which is also a suffix for the substring patter [0...i]
-        lps[i] = len; 
+        lps[i] = j; 
         i++;
       } else {
-        if (len == 0) i++;
-        else len = lps[len - 1];
+        if (j == 0) i++;
+        else j = lps[j - 1];
       }
     }
     return lps;

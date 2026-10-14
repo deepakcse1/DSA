@@ -1,6 +1,9 @@
 package Queue;
 // learning source - https://www.youtube.com/watch?v=2dN4ktn6D1k
 
+// import java.util.ArrayDeque;
+// import java.util.Deque;
+
 public class FindTheWinnerOfCircularGame {
   public int findTheWinner(int n, int k) {
     int ans = 0;
@@ -27,14 +30,10 @@ public class FindTheWinnerOfCircularGame {
     //         queue.offer(i);
     //     }
     //     int i = 1;
-    //     while(queue.size() != 1){
-    //         if(i == k){
-    //             queue.poll();
-    //             i = 1;
-    //         }else{
-    //             queue.offer(queue.poll());
-    //             i++;
-    //         }
+    //     while(queue.size() > 1){
+    //         int top = queue.poll();
+    //         if(i % k != 0) queue.offer(top);
+    //         i++;
     //     }
     //     return queue.peek();
     // }
