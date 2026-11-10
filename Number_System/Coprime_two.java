@@ -1,41 +1,19 @@
 package Number_System;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
-public class Coprime_two {
-  static class FastScanner {
-    private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    private String[] tokens;
-    private int index = 0;
-    String next() throws IOException {
-      while (tokens == null || index >= tokens.length) {
-        tokens = br.readLine().trim().split("\\s+");
-        index = 0;
-      }
-      return tokens[index++];
-    }
-    int nextInt() throws IOException {
-      return Integer.parseInt(next());
-    }
-    long nextLong() throws IOException {
-      return Long.parseLong(next());
-    }
-  }
-  
-  //Build SPF
+class Main {
   static int[] spf;
-  private static void build_spf(int MAX){
-    spf = new int[MAX+1];
+
+  private static void build_spf(int MAX) {
+    spf = new int[MAX + 1];
     for (int i = 2; i <= MAX; i++) {
       spf[i] = i;
     }
-    for (int i = 2; i*i <= MAX; i++) {
+    for (int i = 2; i * i <= MAX; i++) {
       if (spf[i] == i) {
-        for (int j = i*i ; j <= MAX; j += i) {
+        for (int j = i * i; j <= MAX; j += i) {
           if (spf[j] == j) {
             spf[j] = i;
           }
@@ -44,45 +22,54 @@ public class Coprime_two {
     }
   }
 
-  public static void main(String[] args) throws Exception {
-    FastScanner fs = new FastScanner();
-    int N = fs.nextInt();
-    int M = fs.nextInt();
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    int M = sc.nextInt();
+
     int[] arr = new int[N];
-    int max = Integer.MIN_VALUE;
-    for(int i = 0; i < N; i++){
-      arr[i] = fs.nextInt();
+    int max = 0;
+    for (int i = 0; i < N; i++) {
+      arr[i] = sc.nextInt();
       max = Math.max(max, arr[i]);
     }
     max = Math.max(max, M);
     build_spf(max);
-    boolean[] badPrime = new boolean[max+1];
-    for(int x : arr){
-      while(x > 1){
-        int p = spf[x];
+
+    List<Integer> list = solve(arr, max, M);
+    
+    System.out.println(list.size());
+    for (int i : list) {
+      System.out.println(i);
+    }
+  }
+
+  private static List<Integer> solve(int[] arr, int max, int M) {
+    boolean[] badPrime = new boolean[max + 1];
+    for (int el : arr) {
+      while (el > 1) {
+        int p = spf[el];
         badPrime[p] = true;
-        while(x % p == 0){
-          x /= p;
+        while (el % p == 0) {
+          el /= p;
         }
       }
     }
-    boolean[] bad = new boolean[M+1];
-    for(int p = 2; p <= M; p++){
-      if(badPrime[p]){
-        for(int k = p; k <= M; k += p){
+
+    boolean[] bad = new boolean[M + 1];
+    for (int i = 2; i <= M; i++) {
+      if (badPrime[i]) {
+        for (int k = i; k <= M; k += i) {
           bad[k] = true;
         }
       }
     }
+
     List<Integer> list = new ArrayList<>();
-    for(int i = 1; i <= M; i++){
-      if(!bad[i]){
-        list.add(i);
-      }
+    for (int i = 1; i <= M; i++) {
+      if (!bad[i]) list.add(i);
     }
-    System.out.println(list.size());
-    for(int i : list){
-      System.out.println(i);
-    }
+
+    return list;
   }
 }

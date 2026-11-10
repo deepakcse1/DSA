@@ -17,8 +17,6 @@ public class LFUCache {
 
   class DoubleyLinkedList {
     Node head, tail;
-    int size;
-
     DoubleyLinkedList() {
       head = new Node(-1, -1);
       tail = new Node(-1, -1);

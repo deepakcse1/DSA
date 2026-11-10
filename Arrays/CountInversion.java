@@ -26,8 +26,7 @@ public class CountInversion {
         temp[k++] = nums[i++];
       } else {
         temp[k++] = nums[j++];
-        // All remaining elements in left half
-        // are greater than nums[j - 1]
+        // All remaining elements in left half are greater than nums[j - 1]
         count += mid - i + 1;
       }
     }

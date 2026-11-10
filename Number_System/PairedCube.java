@@ -33,7 +33,7 @@ public class PairedCube {
     for (int i = 2; i <= n; i++) {
       spf[i] = i;
     }
-    for (int i = 2; i <= n; i++) {
+    for (int i = 2; i * i <= n; i++) {
       if (spf[i] == i) {
         for (long j = (long) i * i; j <= n; j += i) {
           if (spf[(int) j] == (int) j) {
@@ -57,13 +57,17 @@ public class PairedCube {
     Map<Integer, Integer> map = prime_fact(x);
     StringBuilder sign = new StringBuilder();
     StringBuilder comp = new StringBuilder();
+
     for (int p : map.keySet()) {
       int exp = map.get(p) % 3;
       if (exp == 0) continue;
+      
       int complement = (exp == 1) ? 2 : (exp == 2) ? 1 : 0;
+
       sign.append(p+":").append(exp+",");
       comp.append(p+":").append(complement+",");
     }
+
     if (sign.length() == 0) return new String[] { "", "" };
     String s = sign.substring(0, sign.length() - 1);
     String c = comp.substring(0, comp.length() - 1);
